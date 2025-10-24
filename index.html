@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=inicio/index.html">
     <title>Creatividad Laser</title>
     <style>
         body {
@@ -40,8 +39,18 @@
         <p>Cargando Creatividad Laser...</p>
     </div>
     <script>
-        // Redirección inmediata
-        window.location.href = 'inicio/index.html';
+        // Redirección inmediata con verificación
+        (function() {
+            const targetUrl = './inicio/index.html';
+            
+            // Verificar que no estemos ya en la página de destino
+            if (!window.location.pathname.includes('inicio/index.html')) {
+                // Pequeño delay para que se vea el spinner
+                setTimeout(function() {
+                    window.location.replace(targetUrl);
+                }, 500);
+            }
+        })();
     </script>
 </body>
 </html>

@@ -1,8 +1,7 @@
 #!/bin/bash
-npx serve -s . -p $PORT
-```
+npx serve -s . -p ${PORT:-3000}
 
----
+---chmod +x start.sh
 
 ## 🎯 **Estructura final del proyecto:**
 ```
