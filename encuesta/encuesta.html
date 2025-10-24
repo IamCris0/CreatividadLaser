@@ -7,7 +7,6 @@
     <title>Encuesta - Creatividad Laser</title>
     <link rel="stylesheet" href="encuesta.css">
     <style>
-        /* Estilos para mensajes de éxito/error */
         .mensaje {
             padding: 15px 20px;
             margin-bottom: 20px;
@@ -72,10 +71,8 @@
                 <h1>Encuesta de Satisfacción</h1>
                 <p class="form-intro">Ayúdanos a mejorar nuestro servicio 🌟</p>
                 
-                <!-- Mensajes de estado -->
                 <div id="mensajeEstado"></div>
                 
-                <!-- Loading spinner -->
                 <div id="loadingSpinner" class="loading">
                     <div class="spinner"></div>
                     <p>Enviando encuesta...</p>
@@ -83,7 +80,6 @@
                 
                 <form id="encuestaForm" class="encuesta-form" action="https://api.web3forms.com/submit" method="POST">
                     
-                    <!-- Web3Forms Configuration -->
                     <input type="hidden" name="access_key" value="5ab35746-cbac-4e9d-9266-c368f4af560a">
                     <input type="hidden" name="subject" value="Nueva Encuesta de Satisfacción - Creatividad Laser">
                     <input type="hidden" name="from_name" value="Creatividad Laser">
@@ -236,37 +232,31 @@
     </main>
 
     <script>
-        // Manejo del formulario
         const form = document.getElementById('encuestaForm');
         const submitBtn = document.getElementById('submitBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
         const mensajeDiv = document.getElementById('mensajeEstado');
 
         form.addEventListener('submit', function(e) {
-            // Mostrar spinner
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.6';
             submitBtn.innerHTML = '<span class="btn-icon">⏳</span> ENVIANDO...';
             loadingSpinner.style.display = 'block';
         });
 
-        // Mostrar mensajes de éxito o error desde URL
         window.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.get('success') === '1') {
                 mensajeDiv.innerHTML = '<div class="mensaje mensaje-exito">✅ ¡Encuesta enviada con éxito! Gracias por tu tiempo.</div>';
                 
-                // Limpiar formulario
                 form.reset();
                 
-                // Limpiar URL después de 3 segundos
                 setTimeout(() => {
                     window.history.replaceState({}, document.title, window.location.pathname);
                     mensajeDiv.innerHTML = '';
                 }, 5000);
                 
-                // Scroll al mensaje
                 mensajeDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else if (urlParams.get('error')) {
                 mensajeDiv.innerHTML = '<div class="mensaje mensaje-error">❌ Error al enviar la encuesta. Por favor intenta nuevamente.</div>';
