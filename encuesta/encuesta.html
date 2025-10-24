@@ -6,6 +6,37 @@
     <meta name="description" content="Encuesta de satisfacción - Creatividad Laser">
     <title>Encuesta - Creatividad Laser</title>
     <link rel="stylesheet" href="encuesta.css">
+    <style>
+        /* Estilos para mensajes de éxito/error */
+        .mensaje {
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            animation: slideIn 0.5s ease-out;
+        }
+        .mensaje-exito {
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            border: 2px solid #4CAF50;
+        }
+        .mensaje-error {
+            background: rgba(244, 67, 54, 0.9);
+            color: white;
+            border: 2px solid #f44336;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="background-overlay"></div>
@@ -23,12 +54,10 @@
                 <h1>Encuesta de Satisfacción</h1>
                 <p class="form-intro">Ayúdanos a mejorar nuestro servicio 🌟</p>
                 
-                <form id="encuestaForm" class="encuesta-form" action="https://formsubmit.co/dongeeecuador@gmail.com" method="POST">
-
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_next" value="../inicio/index.html">
-                    <input type="hidden" name="_subject" value="Nueva encuesta de satisfacción - Creatividad Laser">
-                    <input type="hidden" name="_template" value="table">
+                <!-- Mensajes de estado -->
+                <div id="mensajeEstado"></div>
+                
+                <form id="encuestaForm" class="encuesta-form" action="../php/procesar_encuesta.php" method="POST">
                     
                     <div class="form-group">
                         <label for="nombre">
@@ -175,5 +204,40 @@
             <p class="footer-info">Creatividad Laser © 2025 - Todos los derechos reservados</p>
         </footer>
     </main>
+
+    <script>
+        // Mostrar mensajes de éxito o error
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const mensajeDiv = document.getElementById('mensajeEstado');
+            
+            if (urlParams.get('success') === '1') {
+                mensajeDiv.innerHTML = '<div class="mensaje mensaje-exito">✅ ¡Encuesta enviada con éxito! Gracias por tu tiempo.</div>';
+                // Limpiar URL después de 3 segundos
+                setTimeout(() => {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }, 3000);
+            } else if (urlParams.get('error')) {
+                const error = urlParams.get('error');
+                let mensajeError = '';
+                
+                switch(error) {
+                    case 'campos_requeridos':
+                        mensajeError = '⚠️ Por favor completa todos los campos requeridos.';
+                        break;
+                    case 'email_invalido':
+                        mensajeError = '⚠️ El correo electrónico no es válido.';
+                        break;
+                    case 'envio_fallido':
+                        mensajeError = '❌ Error al enviar la encuesta. Por favor intenta nuevamente.';
+                        break;
+                    default:
+                        mensajeError = '❌ Ocurrió un error. Por favor intenta nuevamente.';
+                }
+                
+                mensajeDiv.innerHTML = `<div class="mensaje mensaje-error">${mensajeError}</div>`;
+            }
+        });
+    </script>
 </body>
 </html>
