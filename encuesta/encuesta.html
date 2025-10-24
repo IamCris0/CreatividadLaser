@@ -84,7 +84,8 @@
                     <!-- Deshabilitar CAPTCHA para mejor experiencia -->
                     <input type="hidden" name="_captcha" value="false">
                     
-                    <!-- Página de agradecimiento (cambia TUDOMINIO.com por tu dominio real) -->
+                    <!-- Página de agradecimiento - CAMBIAR POR TU DOMINIO REAL -->
+                    <!-- IMPORTANTE: Debe ser la URL COMPLETA con https:// -->
                     <input type="hidden" name="_next" value="https://detectiveswhatsappdeparejas.com/encuesta/gracias.html">
                     
                     <!-- Asunto del correo -->
@@ -287,6 +288,7 @@ Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicion
             // Mostrar loader
             formLoading.classList.add('active');
             
+            // FormSubmit redirigirá automáticamente a la página de gracias
         });
         
         // Validación adicional de email
