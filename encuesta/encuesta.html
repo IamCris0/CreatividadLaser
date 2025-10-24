@@ -36,6 +36,24 @@
                 transform: translateY(0);
             }
         }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 107, 157, 0.3);
+            border-top: 4px solid #ff6b9d;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -57,7 +75,19 @@
                 <!-- Mensajes de estado -->
                 <div id="mensajeEstado"></div>
                 
-                <form id="encuestaForm" class="encuesta-form" action="../php/procesar_encuesta.php" method="POST">
+                <!-- Loading spinner -->
+                <div id="loadingSpinner" class="loading">
+                    <div class="spinner"></div>
+                    <p>Enviando encuesta...</p>
+                </div>
+                
+                <form id="encuestaForm" class="encuesta-form" action="https://api.web3forms.com/submit" method="POST">
+                    
+                    <!-- Web3Forms Configuration -->
+                    <input type="hidden" name="access_key" value="5ab35746-cbac-4e9d-9266-c368f4af560a">
+                    <input type="hidden" name="subject" value="Nueva Encuesta de Satisfacción - Creatividad Laser">
+                    <input type="hidden" name="from_name" value="Creatividad Laser">
+                    <input type="hidden" name="redirect" value="https://creatividad-laser.com/">
                     
                     <div class="form-group">
                         <label for="nombre">
@@ -104,19 +134,19 @@
                         </label>
                         <div class="rating-container">
                             <div class="rating-stars">
-                                <input type="radio" id="star5" name="calificacion" value="5 - Excelente" required>
+                                <input type="radio" id="star5" name="calificacion" value="5 - Excelente ⭐⭐⭐⭐⭐" required>
                                 <label for="star5" class="star" title="Excelente">★</label>
                                 
-                                <input type="radio" id="star4" name="calificacion" value="4 - Muy bueno">
+                                <input type="radio" id="star4" name="calificacion" value="4 - Muy bueno ⭐⭐⭐⭐">
                                 <label for="star4" class="star" title="Muy bueno">★</label>
                                 
-                                <input type="radio" id="star3" name="calificacion" value="3 - Bueno">
+                                <input type="radio" id="star3" name="calificacion" value="3 - Bueno ⭐⭐⭐">
                                 <label for="star3" class="star" title="Bueno">★</label>
                                 
-                                <input type="radio" id="star2" name="calificacion" value="2 - Regular">
+                                <input type="radio" id="star2" name="calificacion" value="2 - Regular ⭐⭐">
                                 <label for="star2" class="star" title="Regular">★</label>
                                 
-                                <input type="radio" id="star1" name="calificacion" value="1 - Malo">
+                                <input type="radio" id="star1" name="calificacion" value="1 - Malo ⭐">
                                 <label for="star1" class="star" title="Malo">★</label>
                             </div>
                             <span class="rating-label">Selecciona tu calificación</span>
@@ -147,23 +177,23 @@
                         </label>
                         <div class="checkbox-group">
                             <label class="checkbox-label">
-                                <input type="radio" name="comoNosConocio" value="Redes sociales" required>
+                                <input type="radio" name="como_nos_conocio" value="Redes sociales" required>
                                 <span>Redes sociales</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" name="comoNosConocio" value="Recomendación">
+                                <input type="radio" name="como_nos_conocio" value="Recomendación">
                                 <span>Recomendación</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" name="comoNosConocio" value="Búsqueda en Google">
+                                <input type="radio" name="como_nos_conocio" value="Búsqueda en Google">
                                 <span>Búsqueda en Google</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" name="comoNosConocio" value="Publicidad">
+                                <input type="radio" name="como_nos_conocio" value="Publicidad">
                                 <span>Publicidad</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" name="comoNosConocio" value="Otro">
+                                <input type="radio" name="como_nos_conocio" value="Otro">
                                 <span>Otro</span>
                             </label>
                         </div>
@@ -183,13 +213,13 @@
 
                     <div class="form-group">
                         <label class="checkbox-label checkbox-single">
-                            <input type="checkbox" name="recibirInfo" value="Si">
+                            <input type="checkbox" name="recibir_informacion" value="Sí">
                             <span>Deseo recibir información sobre promociones y novedades</span>
                         </label>
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn-submit">
+                        <button type="submit" class="btn-submit" id="submitBtn">
                             <span class="btn-icon">📨</span>
                             ENVIAR ENCUESTA
                         </button>
@@ -206,36 +236,40 @@
     </main>
 
     <script>
-        // Mostrar mensajes de éxito o error
+        // Manejo del formulario
+        const form = document.getElementById('encuestaForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const mensajeDiv = document.getElementById('mensajeEstado');
+
+        form.addEventListener('submit', function(e) {
+            // Mostrar spinner
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+            submitBtn.innerHTML = '<span class="btn-icon">⏳</span> ENVIANDO...';
+            loadingSpinner.style.display = 'block';
+        });
+
+        // Mostrar mensajes de éxito o error desde URL
         window.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const mensajeDiv = document.getElementById('mensajeEstado');
             
             if (urlParams.get('success') === '1') {
                 mensajeDiv.innerHTML = '<div class="mensaje mensaje-exito">✅ ¡Encuesta enviada con éxito! Gracias por tu tiempo.</div>';
+                
+                // Limpiar formulario
+                form.reset();
+                
                 // Limpiar URL después de 3 segundos
                 setTimeout(() => {
                     window.history.replaceState({}, document.title, window.location.pathname);
-                }, 3000);
+                    mensajeDiv.innerHTML = '';
+                }, 5000);
+                
+                // Scroll al mensaje
+                mensajeDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
             } else if (urlParams.get('error')) {
-                const error = urlParams.get('error');
-                let mensajeError = '';
-                
-                switch(error) {
-                    case 'campos_requeridos':
-                        mensajeError = '⚠️ Por favor completa todos los campos requeridos.';
-                        break;
-                    case 'email_invalido':
-                        mensajeError = '⚠️ El correo electrónico no es válido.';
-                        break;
-                    case 'envio_fallido':
-                        mensajeError = '❌ Error al enviar la encuesta. Por favor intenta nuevamente.';
-                        break;
-                    default:
-                        mensajeError = '❌ Ocurrió un error. Por favor intenta nuevamente.';
-                }
-                
-                mensajeDiv.innerHTML = `<div class="mensaje mensaje-error">${mensajeError}</div>`;
+                mensajeDiv.innerHTML = '<div class="mensaje mensaje-error">❌ Error al enviar la encuesta. Por favor intenta nuevamente.</div>';
             }
         });
     </script>
