@@ -39,18 +39,12 @@
         <p>Cargando Creatividad Laser...</p>
     </div>
     <script>
-        // Redirección inmediata con verificación
-        (function() {
-            const targetUrl = './inicio/index.html';
-            
-            // Verificar que no estemos ya en la página de destino
-            if (!window.location.pathname.includes('inicio/index.html')) {
-                // Pequeño delay para que se vea el spinner
-                setTimeout(function() {
-                    window.location.replace(targetUrl);
-                }, 500);
-            }
-        })();
+        // Evitar bucle de redirección
+        if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+            setTimeout(function() {
+                window.location.replace('/inicio/index.html');
+            }, 800);
+        }
     </script>
 </body>
 </html>

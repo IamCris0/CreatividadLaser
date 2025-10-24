@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Sitio web Creatividad Laser",
   "scripts": {
-    "start": "npx serve -s . -p $PORT"
+    "start": "serve -s . -p ${PORT:-3000} -c serve.json",
+    "dev": "serve -s . -p 3000 -c serve.json"
   },
-  "keywords": [],
+  "keywords": ["creatividad", "laser", "corte-laser", "grabado"],
   "author": "Creatividad Laser",
   "license": "MIT",
   "dependencies": {
