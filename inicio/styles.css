@@ -519,4 +519,7 @@ h2 {
     .divider-full {
         width: 90%;
     }
+    .btn-principal::before {
+        width: 80%;
+    }
 }
