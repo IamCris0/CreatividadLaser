@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Encuesta de satisfacción - Creatividad Laser">
+    <title>Encuesta - Creatividad Laser</title>
+    <link rel="stylesheet" href="encuesta.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <main class="container">
+        <header class="logo-section">
+            <img src="../assets/logo.png" 
+                 alt="Creatividad Laser Logo" 
+                 class="logo">
+            <div class="divider"></div>
+        </header>
+
+        <section class="content">
+            <div class="form-container">
+                <h1>Encuesta de Satisfacción</h1>
+                <p class="form-intro">Ayúdanos a mejorar nuestro servicio 🌟</p>
+                
+                <form id="encuestaForm" class="encuesta-form" action="https://formsubmit.co/gcristopher417@gmail.com" method="POST">
+                    <!-- Configuración de FormSubmit -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="../inicio/index.html">
+                    <input type="hidden" name="_subject" value="Nueva encuesta de satisfacción - Creatividad Laser">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-group">
+                        <label for="nombre">
+                            <span class="label-icon">👤</span>
+                            Nombre completo *
+                        </label>
+                        <input type="text" 
+                               id="nombre" 
+                               name="nombre" 
+                               required 
+                               placeholder="Ingresa tu nombre completo"
+                               class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <span class="label-icon">📧</span>
+                            Correo electrónico *
+                        </label>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               required 
+                               placeholder="ejemplo@correo.com"
+                               class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">
+                            <span class="label-icon">📱</span>
+                            Teléfono
+                        </label>
+                        <input type="tel" 
+                               id="telefono" 
+                               name="telefono" 
+                               placeholder="+593 999 999 999"
+                               class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-icon">⭐</span>
+                            ¿Cómo califica nuestro servicio? *
+                        </label>
+                        <div class="rating-container">
+                            <div class="rating-stars">
+                                <input type="radio" id="star5" name="calificacion" value="5 - Excelente" required>
+                                <label for="star5" class="star" title="Excelente">★</label>
+                                
+                                <input type="radio" id="star4" name="calificacion" value="4 - Muy bueno">
+                                <label for="star4" class="star" title="Muy bueno">★</label>
+                                
+                                <input type="radio" id="star3" name="calificacion" value="3 - Bueno">
+                                <label for="star3" class="star" title="Bueno">★</label>
+                                
+                                <input type="radio" id="star2" name="calificacion" value="2 - Regular">
+                                <label for="star2" class="star" title="Regular">★</label>
+                                
+                                <input type="radio" id="star1" name="calificacion" value="1 - Malo">
+                                <label for="star1" class="star" title="Malo">★</label>
+                            </div>
+                            <span class="rating-label">Selecciona tu calificación</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="servicio">
+                            <span class="label-icon">🔧</span>
+                            ¿Qué servicio utilizó? *
+                        </label>
+                        <select id="servicio" name="servicio" required class="form-select">
+                            <option value="">-- Seleccione una opción --</option>
+                            <option value="Corte de goma">Corte de goma</option>
+                            <option value="Grabado de cristales">Grabado de cristales</option>
+                            <option value="Corte y grabado de cuero">Corte y grabado de cuero</option>
+                            <option value="Corte de papel">Corte de papel</option>
+                            <option value="Corte y grabado de acrílico">Corte y grabado de acrílico</option>
+                            <option value="Grabado en madera">Grabado en madera</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="label-icon">❓</span>
+                            ¿Cómo nos conoció? *
+                        </label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="radio" name="comoNosConocio" value="Redes sociales" required>
+                                <span>Redes sociales</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="comoNosConocio" value="Recomendación">
+                                <span>Recomendación</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="comoNosConocio" value="Búsqueda en Google">
+                                <span>Búsqueda en Google</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="comoNosConocio" value="Publicidad">
+                                <span>Publicidad</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="radio" name="comoNosConocio" value="Otro">
+                                <span>Otro</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comentarios">
+                            <span class="label-icon">💬</span>
+                            Comentarios o sugerencias
+                        </label>
+                        <textarea id="comentarios" 
+                                  name="comentarios" 
+                                  rows="5" 
+                                  placeholder="Cuéntanos tu experiencia, sugerencias o comentarios..."
+                                  class="form-textarea"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label checkbox-single">
+                            <input type="checkbox" name="recibirInfo" value="Si">
+                            <span>Deseo recibir información sobre promociones y novedades</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">
+                            <span class="btn-icon">📨</span>
+                            ENVIAR ENCUESTA
+                        </button>
+                        <a href="../inicio/index.html" class="btn-back">Volver al inicio</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <footer class="form-footer">
+            <p>Gracias por tu tiempo ❤️</p>
+            <p class="footer-info">Creatividad Laser © 2025 - Todos los derechos reservados</p>
+        </footer>
+    </main>
+</body>
+</html>
