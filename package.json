@@ -1,0 +1,14 @@
+{
+  "name": "creatividad-laser",
+  "version": "1.0.0",
+  "description": "Sitio web Creatividad Laser",
+  "scripts": {
+    "start": "npx serve -s . -p $PORT"
+  },
+  "keywords": [],
+  "author": "Creatividad Laser",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.0"
+  }
+}
