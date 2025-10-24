@@ -7,7 +7,6 @@
     <title>Encuesta - Creatividad Laser</title>
     <link rel="stylesheet" href="encuesta.css">
     <style>
-        /* Estilos para el loader */
         .form-loading {
             display: none;
             position: fixed;
@@ -48,12 +47,37 @@
             font-size: 1.2em;
             font-weight: 600;
         }
+        .setup-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        .setup-info h3 {
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        .setup-info ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        .setup-info code {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .setup-info strong {
+            color: #ffd700;
+        }
     </style>
 </head>
 <body>
     <div class="background-overlay"></div>
     
-    <!-- Loader de envío -->
     <div class="form-loading" id="formLoading">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -72,46 +96,50 @@
 
         <section class="content">
             <div class="form-container">
+                
+
                 <h1>Encuesta de Satisfacción</h1>
                 <p class="form-intro">Ayúdanos a mejorar nuestro servicio 🌟</p>
                 
-                <!-- FORMSUBMIT - Configuración -->
-                <form id="encuestaForm" class="encuesta-form" 
-                      action="https://formsubmit.co/dongeeecuador@gmail.com" 
+                <!-- 
+                    🎯 GETFORM.IO - CONFIGURACIÓN
+                    
+                    1. Regístrate gratis en: https://getform.io
+                    2. Crea un nuevo formulario
+                    3. Obtendrás un endpoint como: https://getform.io/f/YOUR-UNIQUE-ID
+                    4. Reemplaza en action="" abajo (línea 189)
+                    
+                    CARACTERÍSTICAS:
+                    ✅ GRATIS hasta 50 envíos/mes
+                    ✅ Sin verificación compleja
+                    ✅ Emails automáticos a ti
+                    ✅ Autorespuesta al cliente
+                    ✅ Redirección personalizada
+                    ✅ Anti-spam incluido
+                -->
+                
+                <form id="encuestaForm" 
+                      class="encuesta-form"
+                      action="https://getform.io/f/https://getform.io/f/aqoelzqa"
                       method="POST">
                     
-                    <!-- ⚙️ CONFIGURACIÓN FORMSUBMIT -->
-                    <!-- Deshabilitar CAPTCHA para mejor experiencia -->
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <!-- Página de agradecimiento - CAMBIAR POR TU DOMINIO REAL -->
-                    <!-- IMPORTANTE: Debe ser la URL COMPLETA con https:// -->
-                    <input type="hidden" name="_next" value="https://detectiveswhatsappdeparejas.com/encuesta/gracias.html">
-                    
-                    <!-- Asunto del correo -->
+                    <!-- CONFIGURACIÓN GETFORM -->
+                    <!-- Página de redirección después del envío -->
+                    <input type="hidden" name="_gotcha" style="display:none">
                     <input type="hidden" name="_subject" value="✨ Nueva Encuesta de Satisfacción - Creatividad Laser">
                     
-                    <!-- Formato BOX para mejor diseño (más bonito que table) -->
-                    <input type="hidden" name="_template" value="box">
-                    
-                    <!-- Enviar COPIA al cliente que llenó la encuesta -->
-                    <input type="hidden" name="_cc" value="">
-                    
-                    <!-- Auto-respuesta personalizada al cliente -->
+                    <!-- Email de respuesta automática al cliente -->
                     <input type="hidden" name="_autoresponse" value="🎉 ¡Gracias por completar nuestra encuesta!
 
 Tu opinión es muy valiosa para nosotros y nos ayuda a mejorar cada día.
 
-Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicional, no dudes en contactarnos.
+Hemos recibido tu calificación y comentarios exitosamente.
 
 ¡Esperamos verte pronto!
 
 💖 Equipo Creatividad Laser
 📱 WhatsApp: +593 99 368 1748
 🌐 www.creatividad-laser.com">
-                    
-                    <!-- Campo honeypot anti-spam (no visible) -->
-                    <input type="text" name="_honey" style="display:none">
                     
                     <div class="form-group">
                         <label for="nombre">
@@ -133,7 +161,7 @@ Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicion
                         </label>
                         <input type="email" 
                                id="email" 
-                               name="email" 
+                               name="Email" 
                                required 
                                placeholder="ejemplo@correo.com"
                                class="form-input">
@@ -260,24 +288,17 @@ Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicion
     </main>
 
     <script>
-        // Copiar email del cliente al campo CC automáticamente
-        document.getElementById('email').addEventListener('input', function() {
-            const emailCC = document.querySelector('input[name="_cc"]');
-            if (emailCC) {
-                emailCC.value = this.value;
-            }
-        });
-        
-        // Mostrar loader al enviar formulario
+        // Mostrar loader al enviar
         document.getElementById('encuestaForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             const formLoading = document.getElementById('formLoading');
             
-            // Copiar email una vez más antes de enviar (por seguridad)
-            const emailInput = document.getElementById('email');
-            const emailCC = document.querySelector('input[name="_cc"]');
-            if (emailCC && emailInput.value) {
-                emailCC.value = emailInput.value;
+            // Verificar si hay endpoint configurado
+            const form = document.getElementById('encuestaForm');
+            if (form.action.includes('YOUR-UNIQUE-ENDPOINT-HERE')) {
+                e.preventDefault();
+                alert('⚠️ Por favor configura tu endpoint de Getform primero.\n\n1. Ve a https://getform.io\n2. Crea una cuenta gratis\n3. Copia tu endpoint\n4. Pégalo en la línea 189 del código');
+                return;
             }
             
             // Deshabilitar botón
@@ -288,10 +309,14 @@ Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicion
             // Mostrar loader
             formLoading.classList.add('active');
             
-            // FormSubmit redirigirá automáticamente a la página de gracias
+            // Getform redirigirá automáticamente
+            // Pero agregamos redirección de respaldo
+            setTimeout(() => {
+                window.location.href = 'gracias.html';
+            }, 2000);
         });
         
-        // Validación adicional de email
+        // Validación de email
         document.getElementById('email').addEventListener('blur', function() {
             const email = this.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -303,11 +328,23 @@ Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicion
             }
         });
         
-        // Validación de teléfono (opcional pero útil)
+        // Validación de teléfono
         document.getElementById('telefono').addEventListener('input', function() {
-            // Permitir solo números, espacios, + y -
             this.value = this.value.replace(/[^0-9+\s-]/g, '');
         });
+
+        // Ocultar instrucciones después de configurar
+        setTimeout(() => {
+            const form = document.getElementById('encuestaForm');
+            const setupInfo = document.getElementById('setupInfo');
+            
+            // Si ya configuró el endpoint, ocultar instrucciones
+            if (!form.action.includes('YOUR-UNIQUE-ENDPOINT-HERE') && setupInfo) {
+                setupInfo.style.transition = 'opacity 0.5s';
+                setupInfo.style.opacity = '0';
+                setTimeout(() => setupInfo.remove(), 500);
+            }
+        }, 3000);
     </script>
 </body>
 </html>
