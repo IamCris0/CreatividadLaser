@@ -77,7 +77,7 @@
                 
                 <!-- FORMSUBMIT - Configuración -->
                 <form id="encuestaForm" class="encuesta-form" 
-                      action="https://formsubmit.co/gcristopher417@gmail.com" 
+                      action="https://formsubmit.co/gcristopher417@gmail.com@gmail.com" 
                       method="POST">
                     
                     <!-- ⚙️ CONFIGURACIÓN FORMSUBMIT -->
@@ -88,13 +88,26 @@
                     <input type="hidden" name="_next" value="https://detectiveswhatsappdeparejas.com/encuesta/gracias.html">
                     
                     <!-- Asunto del correo -->
-                    <input type="hidden" name="_subject" value="✨ Nueva Encuesta - Creatividad Laser">
+                    <input type="hidden" name="_subject" value="✨ Nueva Encuesta de Satisfacción - Creatividad Laser">
                     
-                    <!-- Formato de tabla para mejor lectura -->
-                    <input type="hidden" name="_template" value="table">
+                    <!-- Formato BOX para mejor diseño (más bonito que table) -->
+                    <input type="hidden" name="_template" value="box">
                     
-                    <!-- Auto-respuesta al cliente -->
-                    <input type="hidden" name="_autoresponse" value="¡Gracias por tu tiempo! Tu opinión es muy valiosa para nosotros. - Creatividad Laser">
+                    <!-- Enviar COPIA al cliente que llenó la encuesta -->
+                    <input type="hidden" name="_cc" value="">
+                    
+                    <!-- Auto-respuesta personalizada al cliente -->
+                    <input type="hidden" name="_autoresponse" value="🎉 ¡Gracias por completar nuestra encuesta!
+
+Tu opinión es muy valiosa para nosotros y nos ayuda a mejorar cada día.
+
+Hemos recibido tu calificación y comentarios. Si tienes alguna pregunta adicional, no dudes en contactarnos.
+
+¡Esperamos verte pronto!
+
+💖 Equipo Creatividad Laser
+📱 WhatsApp: +593 99 368 1748
+🌐 www.creatividad-laser.com">
                     
                     <!-- Campo honeypot anti-spam (no visible) -->
                     <input type="text" name="_honey" style="display:none">
@@ -246,10 +259,25 @@
     </main>
 
     <script>
+        // Copiar email del cliente al campo CC automáticamente
+        document.getElementById('email').addEventListener('input', function() {
+            const emailCC = document.querySelector('input[name="_cc"]');
+            if (emailCC) {
+                emailCC.value = this.value;
+            }
+        });
+        
         // Mostrar loader al enviar formulario
         document.getElementById('encuestaForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             const formLoading = document.getElementById('formLoading');
+            
+            // Copiar email una vez más antes de enviar (por seguridad)
+            const emailInput = document.getElementById('email');
+            const emailCC = document.querySelector('input[name="_cc"]');
+            if (emailCC && emailInput.value) {
+                emailCC.value = emailInput.value;
+            }
             
             // Deshabilitar botón
             submitBtn.disabled = true;
@@ -259,6 +287,7 @@
             // Mostrar loader
             formLoading.classList.add('active');
             
+            // FormSubmit redirigirá automáticamente a la página de gracias
         });
         
         // Validación adicional de email
