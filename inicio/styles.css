@@ -14,7 +14,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(180deg, #ffc1cc 0%, #ffb3c1 20%, #e8b4d4 40%, #c8b8e0 60%, #a8c5e8 80%, #a0d8e8 100%);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@ body {
     padding: 20px;
     position: relative;
     overflow-x: hidden;
-    color: #ffffff;
+    color: #2c3e50;
 }
 
 /* Fondo con patrón mejorado */
@@ -35,14 +35,14 @@ body {
     right: 0;
     bottom: 0;
     background-image: 
-        radial-gradient(circle at 20% 50%, rgba(230, 126, 34, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
         repeating-linear-gradient(
             45deg,
             transparent,
             transparent 10px,
-            rgba(255, 255, 255, 0.02) 10px,
-            rgba(255, 255, 255, 0.02) 20px
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px
         );
     opacity: 0.8;
     z-index: 0;
@@ -79,7 +79,7 @@ body {
     max-width: 90%;
     height: auto;
     margin-bottom: 20px;
-    filter: drop-shadow(0 8px 16px rgba(230, 126, 34, 0.5));
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
     animation: float 4s ease-in-out infinite;
 }
 
@@ -95,16 +95,16 @@ body {
 .divider {
     width: 150px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, #e67e22, #f39c12, #e67e22, transparent);
+    background: linear-gradient(90deg, transparent, #ff6b9d, #c44569, #ff6b9d, transparent);
     margin: 20px auto;
-    box-shadow: 0 0 15px rgba(230, 126, 34, 0.6);
+    box-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
     border-radius: 2px;
 }
 
 .divider-full {
     width: 80%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 157, 0.4), transparent);
     margin: 50px auto;
     position: relative;
 }
@@ -115,7 +115,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: #e67e22;
+    color: #ff6b9d;
     font-size: 1.2em;
 }
 
@@ -143,18 +143,18 @@ body {
     }
 }
 
-/* Sección principal con borde neón */
+/* Sección principal con borde suave */
 .main-section {
-    background: rgba(26, 26, 46, 0.6);
-    border: 3px solid transparent;
+    background: rgba(255, 255, 255, 0.85);
+    border: 3px solid rgba(255, 255, 255, 0.5);
     border-radius: 30px;
     padding: 40px 30px;
     margin-bottom: 40px;
     position: relative;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
 .main-section::before {
@@ -164,29 +164,31 @@ body {
     left: -3px;
     right: -3px;
     bottom: -3px;
-    background: linear-gradient(135deg, #3498db, #e67e22, #3498db);
+    background: linear-gradient(135deg, #ff6b9d, #c44569, #a8c5e8, #ff6b9d);
     border-radius: 30px;
     z-index: -1;
     animation: neonBorder 3s linear infinite;
-    filter: blur(2px);
+    filter: blur(3px);
+    opacity: 0.6;
 }
 
 @keyframes neonBorder {
     0%, 100% {
-        opacity: 0.8;
+        opacity: 0.6;
     }
     50% {
-        opacity: 1;
+        opacity: 0.9;
     }
 }
 
 .info-section {
-    background: rgba(26, 26, 46, 0.4);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 20px;
     padding: 30px 25px;
     margin-bottom: 40px;
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(230, 126, 34, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 107, 157, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 h1 {
@@ -195,9 +197,11 @@ h1 {
     font-weight: 500;
     letter-spacing: 1px;
     text-shadow: 
-        0 0 10px rgba(230, 126, 34, 0.5),
-        0 2px 8px rgba(0, 0, 0, 0.5);
-    color: #ffffff;
+        0 2px 10px rgba(255, 107, 157, 0.3);
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 h2 {
@@ -205,8 +209,8 @@ h2 {
     margin-bottom: 20px;
     font-weight: 500;
     letter-spacing: 0.5px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-    background: linear-gradient(135deg, #e67e22, #f39c12);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #ff6b9d, #a8c5e8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -221,15 +225,15 @@ h2 {
     font-size: 1.1em;
     line-height: 1.9;
     margin: 20px 0;
-    color: #ecf0f1;
-    font-weight: 300;
+    color: #2c3e50;
+    font-weight: 400;
 }
 
 /* Botón principal - Estilo "AQUÍ" */
 .btn-principal {
     display: inline-block;
-    background: #ffffff;
-    color: #16213e;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    color: #ffffff;
     padding: 15px 70px;
     font-size: 1.3em;
     font-weight: bold;
@@ -238,8 +242,8 @@ h2 {
     margin: 25px 0;
     transition: all 0.3s ease;
     box-shadow: 
-        0 6px 25px rgba(255, 255, 255, 0.3),
-        0 0 20px rgba(52, 152, 219, 0.4);
+        0 6px 25px rgba(255, 107, 157, 0.4),
+        0 0 20px rgba(255, 107, 157, 0.3);
     letter-spacing: 3px;
     position: relative;
     overflow: hidden;
@@ -252,7 +256,7 @@ h2 {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
     transition: left 0.5s;
 }
 
@@ -261,12 +265,12 @@ h2 {
 }
 
 .btn-principal:hover {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: linear-gradient(135deg, #c44569, #a12e4d);
     color: #ffffff;
     transform: translateY(-3px);
     box-shadow: 
-        0 10px 30px rgba(52, 152, 219, 0.5),
-        0 0 30px rgba(52, 152, 219, 0.6);
+        0 10px 30px rgba(255, 107, 157, 0.5),
+        0 0 30px rgba(255, 107, 157, 0.4);
 }
 
 .btn-principal:active {
@@ -276,7 +280,7 @@ h2 {
 /* Botón secundario */
 .btn-secundario {
     display: inline-block;
-    background: linear-gradient(135deg, #e67e22, #d35400);
+    background: linear-gradient(135deg, #a8c5e8, #7fa8d1);
     color: #ffffff;
     padding: 12px 35px;
     font-size: 1em;
@@ -285,7 +289,7 @@ h2 {
     border-radius: 50px;
     margin: 20px 0;
     transition: all 0.4s ease;
-    box-shadow: 0 5px 20px rgba(230, 126, 34, 0.4);
+    box-shadow: 0 5px 20px rgba(168, 197, 232, 0.4);
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
@@ -298,7 +302,7 @@ h2 {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transition: left 0.5s;
 }
 
@@ -307,9 +311,9 @@ h2 {
 }
 
 .btn-secundario:hover {
-    background: linear-gradient(135deg, #d35400, #c0392b);
+    background: linear-gradient(135deg, #7fa8d1, #5a8cbd);
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.6);
+    box-shadow: 0 8px 25px rgba(168, 197, 232, 0.6);
 }
 
 .btn-secundario:active {
@@ -320,9 +324,9 @@ h2 {
 .subtitle {
     font-size: 1.15em;
     margin: 25px 0 0 0;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.8;
-    color: #ecf0f1;
+    color: #2c3e50;
 }
 
 /* Enlaces sociales */
@@ -348,7 +352,7 @@ h2 {
     font-size: 1.15em;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     position: relative;
     overflow: hidden;
 }
@@ -361,7 +365,7 @@ h2 {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     transform: translate(-50%, -50%);
     transition: width 0.6s, height 0.6s;
 }
@@ -373,7 +377,7 @@ h2 {
 
 .social-btn:hover {
     transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .social-btn:active {
@@ -395,7 +399,7 @@ h2 {
 
 .facebook:hover {
     background: linear-gradient(135deg, #0c63d4, #084d9f);
-    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.5);
+    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
 }
 
 .instagram {
@@ -404,7 +408,7 @@ h2 {
 
 .instagram:hover {
     background: linear-gradient(45deg, #d67d2a 0%, #c55730 25%, #b91f36 50%, #a91c56 75%, #9a1570 100%);
-    box-shadow: 0 8px 25px rgba(220, 39, 67, 0.5);
+    box-shadow: 0 8px 25px rgba(220, 39, 67, 0.4);
 }
 
 .tiktok {
@@ -414,7 +418,7 @@ h2 {
 
 .tiktok:hover {
     background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
 }
 
 .whatsapp {
@@ -423,7 +427,7 @@ h2 {
 
 .whatsapp:hover {
     background: linear-gradient(135deg, #1da851, #128c7e);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
 }
 
 .youtube {
@@ -432,7 +436,7 @@ h2 {
 
 .youtube:hover {
     background: linear-gradient(135deg, #cc0000, #990000);
-    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
 }
 
 /* Responsive */
