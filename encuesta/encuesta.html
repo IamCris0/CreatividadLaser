@@ -47,30 +47,17 @@
             font-size: 1.2em;
             font-weight: 600;
         }
-        .setup-info {
+        .alert-primera-vez {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: left;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.6;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
-        .setup-info h3 {
-            margin-bottom: 12px;
-            font-size: 1.3em;
-        }
-        .setup-info ol {
-            margin-left: 20px;
-            line-height: 1.8;
-        }
-        .setup-info code {
-            background: rgba(255,255,255,0.2);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-family: monospace;
-        }
-        .setup-info strong {
+        .alert-primera-vez strong {
             color: #ffd700;
         }
     </style>
@@ -96,50 +83,39 @@
 
         <section class="content">
             <div class="form-container">
-                
-
                 <h1>Encuesta de Satisfacción</h1>
                 <p class="form-intro">Ayúdanos a mejorar nuestro servicio 🌟</p>
                 
-                <!-- 
-                    🎯 GETFORM.IO - CONFIGURACIÓN
-                    
-                    1. Regístrate gratis en: https://getform.io
-                    2. Crea un nuevo formulario
-                    3. Obtendrás un endpoint como: https://getform.io/f/YOUR-UNIQUE-ID
-                    4. Reemplaza en action="" abajo (línea 189)
-                    
-                    CARACTERÍSTICAS:
-                    ✅ GRATIS hasta 50 envíos/mes
-                    ✅ Sin verificación compleja
-                    ✅ Emails automáticos a ti
-                    ✅ Autorespuesta al cliente
-                    ✅ Redirección personalizada
-                    ✅ Anti-spam incluido
-                -->
+                <!-- Alerta solo para la primera vez -->
+                <div class="alert-primera-vez" id="alertPrimeraVez">
+                    <strong>⚠️ IMPORTANTE - Solo la primera vez:</strong><br>
+                    Si nunca has usado este formulario, FormSubmit te enviará un email de confirmación a <strong>dongeeecuador@gmail.com</strong>. Confirma ese email y los siguientes formularios funcionarán automáticamente sin problemas.
+                </div>
                 
+                <!-- FORMSUBMIT - Configuración Optimizada -->
                 <form id="encuestaForm" 
                       class="encuesta-form"
-                      action="https://getform.io/f/https://getform.io/f/aqoelzqa"
+                      action="https://formsubmit.co/dongeeecuador@gmail.com" 
                       method="POST">
                     
-                    <!-- CONFIGURACIÓN GETFORM -->
-                    <!-- Página de redirección después del envío -->
-                    <input type="hidden" name="_gotcha" style="display:none">
+                    <!-- ⚙️ CONFIGURACIÓN FORMSUBMIT -->
+                    <!-- Deshabilitar CAPTCHA -->
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <!-- Página de agradecimiento (actualiza con tu dominio real) -->
+                    <input type="hidden" name="_next" value="https://creatividad-laser-production.up.railway.app/encuesta/gracias.html">
+                    
+                    <!-- Asunto del correo -->
                     <input type="hidden" name="_subject" value="✨ Nueva Encuesta de Satisfacción - Creatividad Laser">
                     
-                    <!-- Email de respuesta automática al cliente -->
-                    <input type="hidden" name="_autoresponse" value="🎉 ¡Gracias por completar nuestra encuesta!
-
-Tu opinión es muy valiosa para nosotros y nos ayuda a mejorar cada día.
-
-Hemos recibido tu calificación y comentarios exitosamente.
-
-¡Esperamos verte pronto!
-
-💖 Equipo Creatividad Laser
-📱 WhatsApp: +593 99 368 1748
-🌐 www.creatividad-laser.com">
+                    <!-- Formato del email (box es más bonito) -->
+                    <input type="hidden" name="_template" value="box">
+                    
+                    <!-- Campo para CC (se llenará automáticamente con el email del cliente) -->
+                    <input type="hidden" name="_cc" value="" id="ccField">
+                    
+                    <!-- Anti-spam -->
+                    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                     
                     <div class="form-group">
                         <label for="nombre">
@@ -161,7 +137,7 @@ Hemos recibido tu calificación y comentarios exitosamente.
                         </label>
                         <input type="email" 
                                id="email" 
-                               name="Email" 
+                               name="Email_Cliente" 
                                required 
                                placeholder="ejemplo@correo.com"
                                class="form-input">
@@ -288,17 +264,34 @@ Hemos recibido tu calificación y comentarios exitosamente.
     </main>
 
     <script>
-        // Mostrar loader al enviar
+        // Ocultar alerta después de 10 segundos
+        setTimeout(() => {
+            const alert = document.getElementById('alertPrimeraVez');
+            if (alert) {
+                alert.style.transition = 'opacity 0.5s';
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 500);
+            }
+        }, 10000);
+
+        // Copiar email del cliente al campo CC automáticamente
+        document.getElementById('email').addEventListener('input', function() {
+            const ccField = document.getElementById('ccField');
+            if (ccField) {
+                ccField.value = this.value;
+            }
+        });
+        
+        // Mostrar loader al enviar formulario
         document.getElementById('encuestaForm').addEventListener('submit', function(e) {
             const submitBtn = document.getElementById('submitBtn');
             const formLoading = document.getElementById('formLoading');
             
-            // Verificar si hay endpoint configurado
-            const form = document.getElementById('encuestaForm');
-            if (form.action.includes('YOUR-UNIQUE-ENDPOINT-HERE')) {
-                e.preventDefault();
-                alert('⚠️ Por favor configura tu endpoint de Getform primero.\n\n1. Ve a https://getform.io\n2. Crea una cuenta gratis\n3. Copia tu endpoint\n4. Pégalo en la línea 189 del código');
-                return;
+            // Copiar email una vez más antes de enviar (por seguridad)
+            const emailInput = document.getElementById('email');
+            const ccField = document.getElementById('ccField');
+            if (ccField && emailInput.value) {
+                ccField.value = emailInput.value;
             }
             
             // Deshabilitar botón
@@ -309,11 +302,7 @@ Hemos recibido tu calificación y comentarios exitosamente.
             // Mostrar loader
             formLoading.classList.add('active');
             
-            // Getform redirigirá automáticamente
-            // Pero agregamos redirección de respaldo
-            setTimeout(() => {
-                window.location.href = 'gracias.html';
-            }, 2000);
+            // FormSubmit redirigirá automáticamente a la página de gracias
         });
         
         // Validación de email
@@ -333,18 +322,9 @@ Hemos recibido tu calificación y comentarios exitosamente.
             this.value = this.value.replace(/[^0-9+\s-]/g, '');
         });
 
-        // Ocultar instrucciones después de configurar
-        setTimeout(() => {
-            const form = document.getElementById('encuestaForm');
-            const setupInfo = document.getElementById('setupInfo');
-            
-            // Si ya configuró el endpoint, ocultar instrucciones
-            if (!form.action.includes('YOUR-UNIQUE-ENDPOINT-HERE') && setupInfo) {
-                setupInfo.style.transition = 'opacity 0.5s';
-                setupInfo.style.opacity = '0';
-                setTimeout(() => setupInfo.remove(), 500);
-            }
-        }, 3000);
+        // Log para debugging (puedes eliminarlo después)
+        console.log('✅ Formulario configurado correctamente');
+        console.log('📧 Emails se enviarán a: dongeeecuador@gmail.com');
     </script>
 </body>
 </html>
