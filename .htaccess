@@ -1,0 +1,27 @@
+# Configuración para Creatividad Laser
+DirectoryIndex index.html
+
+# Habilitar PHP
+AddHandler application/x-httpd-php .php
+
+# Proteger archivos sensibles
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Configuración de errores
+php_flag display_errors Off
+php_flag log_errors On
+
+# Seguridad
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# Redirigir a inicio
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^(.*)$ /inicio/index.html [L]
