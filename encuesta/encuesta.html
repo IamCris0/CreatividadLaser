@@ -47,18 +47,135 @@
             font-size: 1.2em;
             font-weight: 600;
         }
-        .alert-primera-vez {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 20px;
+
+        /* Estilos para radio buttons personalizados (Si/No) */
+        .radio-group-inline {
+            display: flex;
+            gap: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.5);
             border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-            line-height: 1.6;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            justify-content: center;
         }
-        .alert-primera-vez strong {
-            color: #ffd700;
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 12px 25px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            font-weight: 500;
+        }
+
+        .radio-option:hover {
+            background: rgba(255, 107, 157, 0.15);
+            border-color: #ff6b9d;
+            transform: translateY(-2px);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #ff6b9d;
+        }
+
+        .radio-option input[type="radio"]:checked + span {
+            color: #ff1b8d;
+            font-weight: 600;
+        }
+
+        /* Grupo de opciones con checkmarks */
+        .option-checkmarks {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+        }
+
+        .option-check {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 107, 157, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .option-check:hover {
+            background: rgba(255, 107, 157, 0.1);
+            border-color: #ff6b9d;
+        }
+
+        .option-label {
+            font-weight: 500;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .option-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .check-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .check-btn:hover {
+            background: rgba(255, 107, 157, 0.1);
+            border-color: #ff6b9d;
+        }
+
+        .check-btn input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #ff6b9d;
+        }
+
+        .check-btn input[type="radio"]:checked {
+            transform: scale(1.1);
+        }
+
+        /* Responsive para opciones */
+        @media (max-width: 768px) {
+            .radio-group-inline {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .option-check {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .option-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .check-btn {
+                flex: 1;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -86,31 +203,20 @@
                 <h1>Encuesta de Satisfacción</h1>
                 <p class="form-intro">Ayúdanos a mejorar nuestro servicio 🌟</p>
                 
-
                 <form id="encuestaForm" 
                       class="encuesta-form"
                       action="https://formsubmit.co/info@creatividad-laser.com" 
                       method="POST">
                     
                     <!-- ⚙️ CONFIGURACIÓN FORMSUBMIT -->
-                    <!-- Deshabilitar CAPTCHA -->
                     <input type="hidden" name="_captcha" value="false">
-                    
-                    <!-- Página de agradecimiento (actualiza con tu dominio real) -->
                     <input type="hidden" name="_next" value="https://detectiveswhatsappdeparejas.com/encuesta/gracias.html">
-                    
-                    <!-- Asunto del correo -->
                     <input type="hidden" name="_subject" value="✨ Nueva Encuesta de Satisfacción - Creatividad Laser">
-                    
-                    <!-- Formato del email (box es más bonito) -->
                     <input type="hidden" name="_template" value="box">
-                    
-                    <!-- Campo para CC (se llenará automáticamente con el email del cliente) -->
                     <input type="hidden" name="_cc" value="" id="ccField">
-                    
-                    <!-- Anti-spam -->
                     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                     
+                    <!-- DATOS PERSONALES -->
                     <div class="form-group">
                         <label for="nombre">
                             <span class="label-icon">👤</span>
@@ -149,6 +255,7 @@
                                class="form-input">
                     </div>
 
+                    <!-- CALIFICACIÓN CON ESTRELLAS -->
                     <div class="form-group">
                         <label>
                             <span class="label-icon">⭐</span>
@@ -175,6 +282,107 @@
                         </div>
                     </div>
 
+                    <!-- ¿RECOMENDARÍA NUESTRA MARCA? -->
+                    <div class="form-group">
+                        <label>
+                            <span class="label-icon">💝</span>
+                            ¿Recomendaría nuestra marca a un amigo o familiar? *
+                        </label>
+                        <div class="radio-group-inline">
+                            <label class="radio-option">
+                                <input type="radio" name="Recomendaria_Marca" value="Sí" required>
+                                <span>✅ Sí</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Recomendaria_Marca" value="No">
+                                <span>❌ No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CALIDAD DE PRODUCTOS/SERVICIOS -->
+                    <div class="form-group">
+                        <label>
+                            <span class="label-icon">🏆</span>
+                            ¿Califica a nuestros productos/servicios como de calidad? *
+                        </label>
+                        <div class="radio-group-inline">
+                            <label class="radio-option">
+                                <input type="radio" name="Calidad_Productos" value="Sí" required>
+                                <span>✅ Sí</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Calidad_Productos" value="No">
+                                <span>❌ No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CUMPLIÓ EXPECTATIVAS -->
+                    <div class="form-group">
+                        <label>
+                            <span class="label-icon">🎯</span>
+                            ¿Nuestros productos/servicios han cumplido con sus expectativas? *
+                        </label>
+                        <div class="radio-group-inline">
+                            <label class="radio-option">
+                                <input type="radio" name="Cumplio_Expectativas" value="Sí" required>
+                                <span>✅ Sí</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="Cumplio_Expectativas" value="No">
+                                <span>❌ No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- CALIFICACIÓN DEL SOPORTE -->
+                    <div class="form-group">
+                        <label>
+                            <span class="label-icon">🤝</span>
+                            ¿Cómo calificaría el soporte que recibió? *
+                        </label>
+                        <div class="option-checkmarks">
+                            <div class="option-check">
+                                <span class="option-label">Excelente</span>
+                                <div class="option-buttons">
+                                    <label class="check-btn">
+                                        <input type="radio" name="Calificacion_Soporte" value="Excelente" required>
+                                        <span>✅</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="option-check">
+                                <span class="option-label">Bueno</span>
+                                <div class="option-buttons">
+                                    <label class="check-btn">
+                                        <input type="radio" name="Calificacion_Soporte" value="Bueno">
+                                        <span>✅</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="option-check">
+                                <span class="option-label">Regular</span>
+                                <div class="option-buttons">
+                                    <label class="check-btn">
+                                        <input type="radio" name="Calificacion_Soporte" value="Regular">
+                                        <span>✅</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="option-check">
+                                <span class="option-label">Malo</span>
+                                <div class="option-buttons">
+                                    <label class="check-btn">
+                                        <input type="radio" name="Calificacion_Soporte" value="Malo">
+                                        <span>✅</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUÉ SERVICIO UTILIZÓ -->
                     <div class="form-group">
                         <label for="servicio">
                             <span class="label-icon">🔧</span>
@@ -182,6 +390,11 @@
                         </label>
                         <select id="servicio" name="Servicio_Utilizado" required class="form-select">
                             <option value="">-- Seleccione una opción --</option>
+                            <option value="Detalle led con iluminación">Detalle led con iluminación</option>
+                            <option value="Recuerdo personalizado">Recuerdo personalizado</option>
+                            <option value="Llavero personalizado">Llavero personalizado</option>
+                            <option value="Placa personalizada">Placa personalizada</option>
+                            <option value="Medalla personalizada">Medalla personalizada</option>
                             <option value="Corte de goma">Corte de goma</option>
                             <option value="Grabado de cristales">Grabado de cristales</option>
                             <option value="Corte y grabado de cuero">Corte y grabado de cuero</option>
@@ -192,6 +405,20 @@
                         </select>
                     </div>
 
+                    <!-- PRODUCTO/SERVICIO QUE LE GUSTARÍA -->
+                    <div class="form-group">
+                        <label for="producto_deseado">
+                            <span class="label-icon">💡</span>
+                            ¿Qué producto/servicio te gustaría que tuviera que no tiene actualmente?
+                        </label>
+                        <textarea id="producto_deseado" 
+                                  name="Producto_Deseado" 
+                                  rows="3" 
+                                  placeholder="Cuéntanos qué te gustaría que ofreciéramos..."
+                                  class="form-textarea"></textarea>
+                    </div>
+
+                    <!-- CÓMO NOS CONOCIÓ -->
                     <div class="form-group">
                         <label>
                             <span class="label-icon">❓</span>
@@ -221,18 +448,20 @@
                         </div>
                     </div>
 
+                    <!-- SUGERENCIAS PARA MEJORAR -->
                     <div class="form-group">
-                        <label for="comentarios">
-                            <span class="label-icon">💬</span>
-                            Comentarios o sugerencias
+                        <label for="sugerencias">
+                            <span class="label-icon">💭</span>
+                            ¿Qué sugerencias tiene para ayudarnos a mejorar?
                         </label>
-                        <textarea id="comentarios" 
-                                  name="Comentarios_Sugerencias" 
+                        <textarea id="sugerencias" 
+                                  name="Sugerencias_Mejora" 
                                   rows="5" 
-                                  placeholder="Cuéntanos tu experiencia, sugerencias o comentarios..."
+                                  placeholder="Tus sugerencias son muy importantes para nosotros..."
                                   class="form-textarea"></textarea>
                     </div>
 
+                    <!-- RECIBIR INFORMACIÓN -->
                     <div class="form-group">
                         <label class="checkbox-label checkbox-single">
                             <input type="checkbox" name="Recibir_Promociones" value="Sí, deseo recibir información">
@@ -245,7 +474,7 @@
                             <span class="btn-icon">📨</span>
                             ENVIAR ENCUESTA
                         </button>
-                        <a href="https://detectiveswhatsappdeparejas.com/" class="btn-back">Volver al inicio</a>
+                        <a href="../inicio/index.html" class="btn-back">Volver al inicio</a>
                     </div>
                 </form>
             </div>
@@ -258,16 +487,6 @@
     </main>
 
     <script>
-        // Ocultar alerta después de 10 segundos
-        setTimeout(() => {
-            const alert = document.getElementById('alertPrimeraVez');
-            if (alert) {
-                alert.style.transition = 'opacity 0.5s';
-                alert.style.opacity = '0';
-                setTimeout(() => alert.remove(), 500);
-            }
-        }, 10000);
-
         // Copiar email del cliente al campo CC automáticamente
         document.getElementById('email').addEventListener('input', function() {
             const ccField = document.getElementById('ccField');
@@ -281,7 +500,7 @@
             const submitBtn = document.getElementById('submitBtn');
             const formLoading = document.getElementById('formLoading');
             
-            // Copiar email una vez más antes de enviar (por seguridad)
+            // Copiar email una vez más antes de enviar
             const emailInput = document.getElementById('email');
             const ccField = document.getElementById('ccField');
             if (ccField && emailInput.value) {
@@ -295,8 +514,6 @@
             
             // Mostrar loader
             formLoading.classList.add('active');
-            
-            // FormSubmit redirigirá automáticamente a la página de gracias
         });
         
         // Validación de email
@@ -316,9 +533,7 @@
             this.value = this.value.replace(/[^0-9+\s-]/g, '');
         });
 
-        // Log para debugging (puedes eliminarlo después)
-        console.log('✅ Formulario configurado correctamente');
-        console.log('📧 Emails se enviarán a: dongeeecuador@gmail.com');
+        console.log('✅ Formulario configurado correctamente con todos los campos');
     </script>
 </body>
 </html>
