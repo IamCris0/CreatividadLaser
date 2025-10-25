@@ -216,46 +216,7 @@
                     <input type="hidden" name="_cc" value="" id="ccField">
                     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
                     
-                    <!-- DATOS PERSONALES -->
-                    <div class="form-group">
-                        <label for="nombre">
-                            <span class="label-icon">👤</span>
-                            Nombre completo *
-                        </label>
-                        <input type="text" 
-                               id="nombre" 
-                               name="Nombre_Completo" 
-                               required 
-                               placeholder="Ingresa tu nombre completo"
-                               class="form-input">
-                    </div>
 
-                    <div class="form-group">
-                        <label for="email">
-                            <span class="label-icon">📧</span>
-                            Correo electrónico *
-                        </label>
-                        <input type="email" 
-                               id="email" 
-                               name="Email_Cliente" 
-                               required 
-                               placeholder="ejemplo@correo.com"
-                               class="form-input">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono">
-                            <span class="label-icon">📱</span>
-                            Teléfono
-                        </label>
-                        <input type="tel" 
-                               id="telefono" 
-                               name="Telefono" 
-                               placeholder="+593 999 999 999"
-                               class="form-input">
-                    </div>
-
-                    <!-- CALIFICACIÓN CON ESTRELLAS -->
                     <div class="form-group">
                         <label>
                             <span class="label-icon">⭐</span>
@@ -395,12 +356,6 @@
                             <option value="Llavero personalizado">Llavero personalizado</option>
                             <option value="Placa personalizada">Placa personalizada</option>
                             <option value="Medalla personalizada">Medalla personalizada</option>
-                            <option value="Corte de goma">Corte de goma</option>
-                            <option value="Grabado de cristales">Grabado de cristales</option>
-                            <option value="Corte y grabado de cuero">Corte y grabado de cuero</option>
-                            <option value="Corte de papel">Corte de papel</option>
-                            <option value="Corte y grabado de acrílico">Corte y grabado de acrílico</option>
-                            <option value="Grabado en madera">Grabado en madera</option>
                             <option value="Otro">Otro</option>
                         </select>
                     </div>
@@ -438,10 +393,6 @@
                                 <span>Búsqueda en Google</span>
                             </label>
                             <label class="checkbox-label">
-                                <input type="radio" name="Como_Nos_Conocio" value="Publicidad">
-                                <span>Publicidad</span>
-                            </label>
-                            <label class="checkbox-label">
                                 <input type="radio" name="Como_Nos_Conocio" value="Otro">
                                 <span>Otro</span>
                             </label>
@@ -461,13 +412,6 @@
                                   class="form-textarea"></textarea>
                     </div>
 
-                    <!-- RECIBIR INFORMACIÓN -->
-                    <div class="form-group">
-                        <label class="checkbox-label checkbox-single">
-                            <input type="checkbox" name="Recibir_Promociones" value="Sí, deseo recibir información">
-                            <span>Deseo recibir información sobre promociones y novedades</span>
-                        </label>
-                    </div>
 
                     <div class="form-actions">
                         <button type="submit" class="btn-submit" id="submitBtn">
@@ -485,55 +429,5 @@
             <p class="footer-info">Creatividad Laser © 2025 - Todos los derechos reservados</p>
         </footer>
     </main>
-
-    <script>
-        // Copiar email del cliente al campo CC automáticamente
-        document.getElementById('email').addEventListener('input', function() {
-            const ccField = document.getElementById('ccField');
-            if (ccField) {
-                ccField.value = this.value;
-            }
-        });
-        
-        // Mostrar loader al enviar formulario
-        document.getElementById('encuestaForm').addEventListener('submit', function(e) {
-            const submitBtn = document.getElementById('submitBtn');
-            const formLoading = document.getElementById('formLoading');
-            
-            // Copiar email una vez más antes de enviar
-            const emailInput = document.getElementById('email');
-            const ccField = document.getElementById('ccField');
-            if (ccField && emailInput.value) {
-                ccField.value = emailInput.value;
-            }
-            
-            // Deshabilitar botón
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.6';
-            submitBtn.innerHTML = '<span class="btn-icon">⏳</span> ENVIANDO...';
-            
-            // Mostrar loader
-            formLoading.classList.add('active');
-        });
-        
-        // Validación de email
-        document.getElementById('email').addEventListener('blur', function() {
-            const email = this.value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (email && !emailRegex.test(email)) {
-                this.setCustomValidity('Por favor ingresa un correo válido');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
-        
-        // Validación de teléfono
-        document.getElementById('telefono').addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9+\s-]/g, '');
-        });
-
-        console.log('✅ Formulario configurado correctamente con todos los campos');
-    </script>
 </body>
 </html>
